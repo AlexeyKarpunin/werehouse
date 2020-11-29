@@ -1,0 +1,34 @@
+{
+  "name": "werehouse",
+  "version": "0.1.0",
+  "private": true,
+
+  "scripts": {
+    "start": "yarn workspace frontend build && node index.js",
+    "start_nodemon": "yarn workspace frontend build && nodemon index.js"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-google": "^0.14.0",
+    "jest": "^24.9.0"
+  }
+}
