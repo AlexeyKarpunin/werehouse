@@ -12,5 +12,6 @@ module.exports = {
       "semi": ["error", "always"],
       "quotes": ["error", "single"],
       "linebreak-style": 0,
+      "require-jsdoc": ["off"],
     },
   };
