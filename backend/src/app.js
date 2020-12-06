@@ -14,9 +14,9 @@ POST  /api/log/               - create log
 
 */
 
-app.get('/api/items/', controllers.getItemList );
+app.get('/api/items/', controllers.getItemList);
 
-app.get('/api/items/{itemId}', controllers.getItem );
+app.get('/api/items/:itemId', controllers.getItem);
 
 app.post('/api/items/', controllers.createItem);
 

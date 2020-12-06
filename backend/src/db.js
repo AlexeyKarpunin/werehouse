@@ -52,7 +52,9 @@ const connection = mysql.createConnection(options);
 const init = async () => {
   const conn = mysql.createConnection(Object.assign(options, {database: null}));
   const initQuery = fs.readFileSync(path.resolve(__dirname, './init.sql')).toString();
-  return await conn.query(initQuery);
+  const result = await conn.query(initQuery);
+  conn.end();
+  return result;
 };
 
 const query = (...queries) => {

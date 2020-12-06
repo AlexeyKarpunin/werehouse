@@ -17,7 +17,7 @@ CREATE TABLE `items` (
   `name` varchar(255) NOT NULL,
   `amount` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`item_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `log` (
   `document_id` int NOT NULL,
@@ -28,8 +28,6 @@ CREATE TABLE `log` (
   CONSTRAINT `fk_log_document` FOREIGN KEY (`document_id`) REFERENCES `document` (`document_id`),
   CONSTRAINT `fk_log_item` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
 
 INSERT INTO items (name) VALUES ('laptop'), ('smartphone'), ('headset'), ('monitor');
 
