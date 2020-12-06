@@ -3,7 +3,7 @@ const db = require('./db');
 
 
 const SQL_SELECT_ALL_FROM_ITEMS = 'SELECT * FROM `items`;';
-const SQL_SELECT_ITEM_BY_ITEM_ID = 'SELECT * FROM `items` WHERE `id` = ';
+const SQL_SELECT_ITEM_BY_ITEM_ID = 'SELECT * FROM `items` WHERE `item_id` = ?';
 
 const getItemList = async (req, res) => {
   const query = mysql.format(SQL_SELECT_ALL_FROM_ITEMS);
@@ -12,8 +12,8 @@ const getItemList = async (req, res) => {
 };
 
 const getItem = async (req, res) => {
-  const {id} = req.body;
-  const query = SQL_SELECT_ITEM_BY_ITEM_ID + id;
+  const {itemId} = req.params;
+  const query = mysql.format(SQL_SELECT_ITEM_BY_ITEM_ID, [itemId]);
   const data = await db.query(query);
 
   res.json(data);
@@ -21,7 +21,7 @@ const getItem = async (req, res) => {
 
 const createItem = async (req, res) => {
   const {name} = req.body;
-  const SQL_INSERT_ITEM_INTO_ITEM = `INSERT INTO item (name) VALUES (${name});`;
+  const SQL_INSERT_ITEM_INTO_ITEM = mysql.format('INSERT INTO `items` (name) VALUES (?);', [name]);
   const data = await db.query(SQL_INSERT_ITEM_INTO_ITEM);
 
   res.json(data);
