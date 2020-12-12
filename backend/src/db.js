@@ -47,10 +47,12 @@ const options = {
   multipleStatements: true,
 };
 
+
 const connection = mysql.createConnection(options);
 
 const init = async () => {
   const conn = mysql.createConnection(Object.assign(options, {database: null}));
+  // eslint-disable-next-line max-len
   const initQuery = fs.readFileSync(path.resolve(__dirname, './init.sql')).toString();
   const result = await conn.query(initQuery);
   conn.end();
