@@ -8,5 +8,4 @@ const INIT__STORE = {
 }
 
 const store = createStore(rootReducer, INIT__STORE);
-
 export default store;
