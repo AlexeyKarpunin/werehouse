@@ -1,0 +1,159 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 26px;
+}
+
+.main__page {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.product__section {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 100px 0 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.goods__container {
+  position: relative;
+  width: 30%;
+  overflow: hidden;
+  border: 1px solid black;
+}
+
+.goods__container h1 {
+  margin: 0 auto;
+  text-align: center;
+  padding: 15px 0;
+}
+
+.goods__btns {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buy__btn {
+  margin: 15px;
+}
+.add__btn {
+  margin: 15px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.werehouse__container {
+  width: 50%;
+  border: 1px solid black;
+}
+
+.werehouse__container h1 {
+  margin:  0 auto;
+  text-align: center;
+  padding: 15px;
+}
+
+.log__container {
+  position: relative;
+  width: 20%;
+}
+
+.log__info {
+  position: absolute;
+  width: 100%;
+  min-height: 200px;
+  top: 0;
+  border: 1px solid black;
+  transition: 0.5s ease-in ;
+}
+
+.log--none--show {
+  top: -500px;
+}
+
+.log__btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.close__log__btn {
+  position: absolute;
+  top: 0;
+  min-width: 15px ;
+  min-height: 15px;
+  font-size: 20px;
+  margin: 10px;
+  right: 0;
+  outline: none;
+  transform: rotate(45deg);
+  background-color: white;
+  border: none;
+}
+
+.goods__input {
+  position: absolute;
+  width: 150px;
+  top: 22px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.5s ease-in;
+  bottom: 15px;
+}
+
+.input--none-show {
+  top: 200px;
+}
+
+.goods__input input {
+  max-width: 140px;
+}
+
+.goods__input button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.input__container {
+  position: relative;
+  max-width: 150px;
+  margin: 0 auto;
+}
+
+.goods__list {
+  list-style: none;
+}
+
+.goods__item {
+  display: flex;
+  justify-content: space-between;
+  max-width: 200px;
+  text-align: left;
+  margin: 5px auto;
+}
+
+.goods__item div {
+  width: 100%;
+  margin-left: 10px;
+}
+
+.goods__item span {
+  float: right;
+  margin-right: 10px;
+}
+
+
+
+

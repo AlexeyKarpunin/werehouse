@@ -4,15 +4,6 @@ const controllers = require('./controllers');
 const app = express();
 app.use(express.json());
 
-/*
-
-GET   /api/items/             - items list
-GET   /api/items/{itemId}     - get item
-POST  /api/items/             - craete item
-
-POST  /api/log/               - create log
-
-*/
 
 app.get('/api/items/', controllers.getItemList);
 
