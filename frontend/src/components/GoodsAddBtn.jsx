@@ -20,23 +20,18 @@ export default function GoodsAddbtn () {
   async function addItem() {
     let name = itemName.current.value;
 
-    await createItem(name);
-
-    const data = await getGoods;
-    const res = await data;
-
-    // createItem(name)
-    //     .then( () => {
-    //       getGoods.then( (respone) => {
-    //         respone.json()
-    //       })
-    //       .then( (data) => {
-    //         store.dispatch(addGoods(data));
-    //         setProductName('');
-    //       })
-    //       .catch ( (err) => {throw err})
-    //     })
-    //     .catch ( (err) => {throw err});
+    createItem(name)
+        .then( () => {
+          getGoods().then( (respone) => {
+            return respone.json()
+          })
+          .then( (data) => {
+            store.dispatch(addGoods(data));
+            setProductName('');
+          })
+          .catch ( (err) => {throw err})
+        })
+        .catch ( (err) => {throw err});
   }
 
   function focusInput (event) {

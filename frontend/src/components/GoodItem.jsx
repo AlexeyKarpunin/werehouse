@@ -1,6 +1,7 @@
 
-import React, {useEffect, useState} from 'react';
-import store from '../redux/store';
+import React, {useState} from 'react';
+import { connect } from 'react-redux';
+import selectGoods from '../redux/selectGoods';
 
 export function Item (props) {
   const [counter, setCounter] = useState(props.defoultValue)
@@ -22,18 +23,22 @@ export function Item (props) {
   )
 }
 
-export default function GoodItem () {
-  const [goods, setGoods] = useState([]);
-
-    useEffect(() => {
-      store.subscribe( () => {
-        const state = store.getState();
-        setGoods(state.goods);
-      })
-    });
-    
+export function GoodItem ({ goods }) {
   return goods.map( (item, index) => {
     return <Item key={index} name={item.name} defoultValue = {0} />
   })
 }
+
+
+const mapStateToProps = (state /*, ownProps*/) => {
+  return {
+    goods: selectGoods(state)
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GoodItem)
 

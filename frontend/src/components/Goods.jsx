@@ -1,25 +1,19 @@
-import React, {useEffect, useState} from 'react';
-import store from '../redux/store';
+import React, {useEffect} from 'react';
 import {showAddMenu, addGoods} from '../redux/actions';
 import {FLAGS_FOR_MENUS} from '../redux/types';
 import GoodsAddbtn from './GoodsAddBtn';
 import {getGoods} from '../api/api';
 import GoodItem from './GoodItem';
+import { connect } from 'react-redux';
 
-export default function Goods () {
+function Goods ({ updateGoods, openAddPanel }) {
 
   useEffect ( () => {
-    getGoods.then( (res) => res.json())
-          .then( (data) => {
-            store.dispatch(addGoods(data))
-          })
-          .catch ( (err) => {throw err})
+    (async () => {
+      const response = await getGoods()
+      updateGoods(await response.json())
+    })()
   }, []);
-
- 
-  function openAddPanel () {
-    store.dispatch(showAddMenu(FLAGS_FOR_MENUS.open));
-  }
 
   return (
          <div className="goods__container">
@@ -35,3 +29,16 @@ export default function Goods () {
         </div>
   );
 };
+
+// const mapStateToProps = (state /*, ownProps*/) => {
+//   return {}
+// }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateGoods: (data) => dispatch(addGoods(data)),
+    openAddPanel: () => dispatch(showAddMenu(FLAGS_FOR_MENUS.open))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Goods)
