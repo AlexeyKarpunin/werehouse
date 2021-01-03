@@ -7,6 +7,7 @@ export const UPDATE_ITEMS_WAREHOUSE = 'UPDATE__ITEMS__AMOUNT__IN__MYSQL';
 export const BASKET_CLEAR_ACTION = 'CLEAR__BASKET';
 
 
+
 export const FLAGS_FOR_MENUS = {
   open: 'opened',
   close: 'closed',

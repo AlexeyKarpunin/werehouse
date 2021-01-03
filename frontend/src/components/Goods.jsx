@@ -28,3 +28,9 @@ export default function Goods () {
         </div>
   );
 };
+
+// const mapStateToProps = (state /*, ownProps*/) => {
+//   return {}
+// }
+
+

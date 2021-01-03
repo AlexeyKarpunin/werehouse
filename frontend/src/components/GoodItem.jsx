@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {addProductInBasket, deleteProductInBasket} from '../redux/actions'
 
+
 export function Item (props) {
   const dispatch = useDispatch();
   const counter = useSelector( (state) => {
@@ -52,4 +53,6 @@ export default function GoodItem () {
     />
   })
 }
+
+
 

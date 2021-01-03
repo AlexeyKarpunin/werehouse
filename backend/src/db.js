@@ -48,7 +48,6 @@ const options = {
   multipleStatements: true,
 };
 
-
 const pool = mysql.createPool(options);
 
 const init = async () => {
