@@ -1,32 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import store from '../redux/store'
-import {Item} from './GoodItem';
+import React from 'react';
+import { useSelector } from 'react-redux';
+
+export function Item (props) {
+  return (
+    <li className="goods__item" key={props.key}>
+      <div>{props.name} <span>{props.defoultValue}</span></div>
+    </li>
+  )
+}
 
 
 export default function WereHouse () {
-
-  const [goods, setGoods] = useState([]);
-
-    useEffect(() => {
-      store.subscribe( () => {
-        const state = store.getState();
-        setGoods(state.goods);
-      })
-    });
+  const goods = useSelector( (state) => state.goodsState.goods);
 
   return (
         <div className="werehouse__container">
-             <h1>WereHouse</h1>
+             <h1>WareHouse</h1>
              <ul className="WH__list">
                {goods.map( (item, index) => {
-                 if (item.amount >= 0) {
+                 if (item.amount > 0) {
                   return (
                     <Item key={index} name={item.name} defoultValue = {item.amount} />
                   )
                  }
                })}
              </ul>
-             <button style={{margin: '0 auto', display: 'block'}}>SALE</button>
         </div>
   );
 }

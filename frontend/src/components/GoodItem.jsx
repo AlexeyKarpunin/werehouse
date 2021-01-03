@@ -1,16 +1,34 @@
-
-import React, {useEffect, useState} from 'react';
-import store from '../redux/store';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {addProductInBasket, deleteProductInBasket} from '../redux/actions'
 
 export function Item (props) {
-  const [counter, setCounter] = useState(props.defoultValue)
-  
+  const dispatch = useDispatch();
+  const counter = useSelector( (state) => {
+    const item = state.basket.get(props.itemId);
+    if (item) {
+      return item.amount;
+    } else {
+      return 0;
+    }
+  })
+
   function minus () {
-    if (counter > 0) setCounter(counter - 1);
+    if (counter > 0) {
+      dispatch(deleteProductInBasket({
+        itemId: props.itemId,
+        name: props.name,
+        amount: counter,
+      }));
+    } 
   }
 
   function plus () {
-    setCounter(counter + 1);
+    dispatch(addProductInBasket({
+        itemId: props.itemId,
+        name: props.name,
+        amount: counter,
+    }))
   }
 
   return (
@@ -23,17 +41,15 @@ export function Item (props) {
 }
 
 export default function GoodItem () {
-  const [goods, setGoods] = useState([]);
+ const goods = useSelector( (state) => state.goodsState.goods);
 
-    useEffect(() => {
-      store.subscribe( () => {
-        const state = store.getState();
-        setGoods(state.goods);
-      })
-    });
-    
   return goods.map( (item, index) => {
-    return <Item key={index} name={item.name} defoultValue = {0} />
+    return <Item 
+    key={index} 
+    name={item.name} 
+    defoultValue = {0} 
+    itemId = {item.item_id}
+    />
   })
 }
 

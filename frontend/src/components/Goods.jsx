@@ -1,25 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import store from '../redux/store';
-import {showAddMenu, addGoods} from '../redux/actions';
-import {FLAGS_FOR_MENUS} from '../redux/types';
+import React from 'react';
 import GoodsAddbtn from './GoodsAddBtn';
-import {getGoods} from '../api/api';
 import GoodItem from './GoodItem';
+import { useDispatch, useSelector } from 'react-redux';
+import {updateItemsAmout} from '../redux/actions';
 
 export default function Goods () {
+  const basket = useSelector( (state) => state.basket );
+  const dispatch = useDispatch();
 
-  useEffect ( () => {
-    getGoods.then( (res) => res.json())
-          .then( (data) => {
-            store.dispatch(addGoods(data))
-          })
-          .catch ( (err) => {throw err})
-  }, []);
+  function buyProducts () {dispatch(updateItemsAmout(basket, 'buy'));}
 
- 
-  function openAddPanel () {
-    store.dispatch(showAddMenu(FLAGS_FOR_MENUS.open));
-  }
+  function saleProducts () {}
 
   return (
          <div className="goods__container">
@@ -28,8 +19,10 @@ export default function Goods () {
                <GoodItem />
              </ul>
              <div className="goods__btns">
-               <button className="btn buy__btn">buy</button>
-               <button className="btn add__btn" onClick={openAddPanel}>add</button>
+               <div>
+               <button className="btn buy__btn" onClick={buyProducts}>buy</button>
+               <button className="btn buy__btn" onClick={saleProducts}>sale</button>
+               </div>
                <GoodsAddbtn/>
              </div>
         </div>

@@ -1,53 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import store from '../redux/store';
-import {FLAGS_FOR_MENUS} from '../redux/types';
-import {createItem, getGoods} from '../api/api'
-import {addGoods} from '../redux/actions'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import {addItem} from '../redux/actions';
 
 export default function GoodsAddbtn () {
-  const [goodsRef, setGoodsRef] = useState(React.createRef());
-  const [productName, setProductName] = useState('');
   const itemName = React.createRef();
+  const dispatch = useDispatch();
 
-  useEffect (() => {
-    store.subscribe (() => {
-      const state = store.getState();
-      if (state.addMenu === FLAGS_FOR_MENUS.open) goodsRef.current.classList.remove('input--none-show');
-      if (state.addMenu === FLAGS_FOR_MENUS.close) goodsRef.current.classList.add('input--none-show');
-    })
-  },);
-
-  async function addItem() {
-    let name = itemName.current.value;
-
-    await createItem(name);
-
-    const data = await getGoods;
-    const res = await data;
-
-    // createItem(name)
-    //     .then( () => {
-    //       getGoods.then( (respone) => {
-    //         respone.json()
-    //       })
-    //       .then( (data) => {
-    //         store.dispatch(addGoods(data));
-    //         setProductName('');
-    //       })
-    //       .catch ( (err) => {throw err})
-    //     })
-    //     .catch ( (err) => {throw err});
-  }
-
-  function focusInput (event) {
-    setProductName(productName + event.key);
+  function addGoods() {
+    dispatch(addItem(itemName.current.value));
+    itemName.current.value = '';
   }
 
   return (
-            <div ref={goodsRef} className="goods__input input--none-show">
+            <div className="goods__input">
                <div className="input__container">
-                   <input onKeyPress={focusInput} ref={itemName} type='text' value={productName}></input>
-                   <button onClick={addItem}>ADD</button>
+                   <input ref={itemName} type='text'></input>
+                   <button onClick={addGoods}>ADD</button>
                </div>
              </div>
   );

@@ -1,24 +1,21 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import LogInfo from './LogInfo';
-import store from '../redux/store';
+import {useDispatch, useSelector } from 'react-redux';
 import {showLog} from '../redux/actions';
 import {FLAGS_FOR_MENUS} from '../redux/types';
 
 export default function Log () {
-
-const [logBtn, setLogBtn] = useState(true);
-
-function showLogMenu () {
-  setLogBtn(false);
-  store.dispatch(showLog(FLAGS_FOR_MENUS.open))
-}
+  const logStatus = useSelector( (state) => state.menu.logMenu);
+  const dispatch = useDispatch();
 
   return (
         <div className="log__container">
-             <LogInfo 
-                showLogBtn = {setLogBtn}
-             />
-             {logBtn ? <button className="btn log__btn" onClick={showLogMenu}>log</button> : null}
+             <LogInfo logStatus = {logStatus} />
+             { logStatus === FLAGS_FOR_MENUS.close 
+                          ? 
+              <button className="btn log__btn" onClick={() => dispatch(showLog(FLAGS_FOR_MENUS.open))}>log</button> 
+                          : 
+              null}
         </div>
   );
 }

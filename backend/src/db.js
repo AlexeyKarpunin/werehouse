@@ -40,6 +40,7 @@ const path = require('path');
 const mysql = require('mysql');
 
 const options = {
+  connectionLimit: 10,
   host: 'localhost',
   user: 'root',
   password: '1234',
@@ -48,7 +49,7 @@ const options = {
 };
 
 
-const connection = mysql.createConnection(options);
+const pool = mysql.createPool(options);
 
 const init = async () => {
   const conn = mysql.createConnection(Object.assign(options, {database: null}));
@@ -59,16 +60,28 @@ const init = async () => {
   return result;
 };
 
-const query = (...queries) => {
+const query = (queries) => {
   return new Promise((resolve, reject) => {
-    connection.query(queries.join(' '), (error, results, fields) => {
-      if (error) reject(error);
-      resolve(results);
+    return pool.getConnection((err, connection) => {
+      if (err) throw err; // not connected!
+      if (typeof queries === 'string') {
+        connection.query(queries, (error, results, fields) => {
+          if (error) reject(error);
+          connection.release();
+          resolve(results);
+        });
+      } else {
+        connection.query(queries.join(' '), (error, results, fields) => {
+          if (error) reject(error);
+          connection.release();
+          resolve(results);
+        });
+      }
     });
   });
 };
 
-const close = (callback) => connection.end(callback);
+const close = (callback) => pool.end(callback);
 
 module.exports = {
   init,

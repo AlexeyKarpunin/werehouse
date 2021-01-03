@@ -11,8 +11,9 @@ app.get('/api/items/:itemId', controllers.getItem);
 
 app.post('/api/items/', controllers.createItem);
 
-app.post('/api/log/', controllers.createLog);
+// app.post('/api/log/', controllers.createLog);
 
+app.put('/api/items/update-amount', controllers.updateAmountItem);
 
 module.exports = {
   app,

@@ -10,6 +10,7 @@ USE `wherehouse`;
 CREATE TABLE `document` (
   `document_id` int NOT NULL AUTO_INCREMENT,
   `time` datetime NOT NULL,
+  `info` varchar(255) NOT NULL,
   PRIMARY KEY (`document_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
